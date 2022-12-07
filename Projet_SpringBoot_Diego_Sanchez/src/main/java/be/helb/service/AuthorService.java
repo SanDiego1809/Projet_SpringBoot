@@ -25,6 +25,31 @@ public class AuthorService
         return authorDao.findAll();
     }
 
+    public Author createAuthor(Author author)
+    {
+        return authorDao.save(author);
+    }
+
+    public void deleteAuthorById(Long authorId)
+    {
+        authorDao.deleteById(authorId);
+    }
+
+    public Author updateAuthor(Author author, Long authorId)
+    {
+        Author depDB = authorDao.findById(authorId).get();
+
+
+        depDB.setName(author.getName());
+        depDB.setFirstName(author.getFirstName());
+        depDB.setCountry(author.getCountry());
+        depDB.setDateOfBirth(author.getDateOfBirth());
+        depDB.setDateOfDeath(author.getDateOfDeath());
+
+
+        return authorDao.save(depDB);
+    }
+
     public AuthorDao getAuthorDao() {
         return authorDao;
     }

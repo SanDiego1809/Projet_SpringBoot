@@ -4,9 +4,9 @@ import be.helb.model.Album;
 import be.helb.model.Author;
 import be.helb.service.AlbumService;
 import be.helb.service.AuthorService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController //crée un singleton du controleur
@@ -25,16 +25,22 @@ public class AuthorController
         return authorService.getAll();
     }
 
-    /*@PostMapping
-    public String addAlbum(@Valid Album album, BindingResult result, Model model)
+    @PostMapping("/author")
+    public Author createAuthor(@Valid @RequestBody Author author)
     {
-        if (result.hasErrors())
-        {
-            return "add-user";
-        }
+        return authorService.createAuthor(author);
+    }
 
-        userRepository.save(user);
-        return "redirect:/index";
-    }*/
+    @DeleteMapping("/author/{id}")
+    public String deleteAuthorById(@PathVariable("id") Long authorId)
+    {
+        authorService.deleteAuthorById(authorId);
+        return "Deleted Successfully";
+    }
+    @PutMapping("/author/{id}")
+    public Author updateAuthor(@RequestBody Author author,@PathVariable("id") Long authorId)
+    {
+        return authorService.updateAuthor(author, authorId);
+    }
 
 }

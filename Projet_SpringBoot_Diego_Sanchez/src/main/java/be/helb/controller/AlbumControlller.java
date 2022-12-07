@@ -26,20 +26,20 @@ public class AlbumControlller
     }
 
     //create Album
-    @PostMapping("/create")
+    @PostMapping("/album")
     public Album createAlbum(@Valid @RequestBody Album album)
     {
         return albumService.createAlbum(album);
     }
 
     @DeleteMapping("/album/{id}")
-    public String deleteDepartmentById(@PathVariable("id") Long albumId)
+    public String deleteAlbumById(@PathVariable("id") Long albumId)
     {
         albumService.deleteAlbumById(albumId);
         return "Deleted Successfully";
     }
     @PutMapping("/album/{id}")
-    public Album updateDepartment(@RequestBody Album album,@PathVariable("id") Long albumId)
+    public Album updateAlbum(@RequestBody Album album,@PathVariable("id") Long albumId)
     {
         return albumService.updateAlbum(album, albumId);
     }
