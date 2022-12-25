@@ -34,6 +34,16 @@ public class AuthorService
     {
         authorDao.deleteById(authorId);
     }
+    public void deleteAllAuthors()
+    {
+        List<Author> list = authorDao.findAll();
+
+        for (Author author: list)
+        {
+            author.getAlbums().clear();
+        }
+        authorDao.deleteAll();
+    }
 
     public Author updateAuthor(Author author, Long authorId)
     {
@@ -48,6 +58,19 @@ public class AuthorService
 
 
         return authorDao.save(depDB);
+    }
+
+    public Author getAuthorByName(String name)
+    {
+
+        Author authors = authorDao.findByName(name);
+        return authors;
+    }
+    public Author getAuthorById(Long id)
+    {
+
+        Author author = authorDao.findById(id).get();
+        return author;
     }
 
     public AuthorDao getAuthorDao() {

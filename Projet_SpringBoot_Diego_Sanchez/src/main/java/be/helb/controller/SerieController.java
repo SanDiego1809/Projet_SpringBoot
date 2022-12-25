@@ -5,9 +5,8 @@ import be.helb.model.Serie;
 import be.helb.service.SerieService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 public class SerieController
 {
@@ -25,7 +24,7 @@ public class SerieController
     }
 
     @PostMapping("/serie")
-    public Serie createSerie(@Valid @RequestBody Serie serie)
+    public Serie createSerie(@RequestBody Serie serie)
     {
         return serieService.createSerie(serie);
     }
@@ -36,9 +35,28 @@ public class SerieController
         serieService.deleteSerieById(serieId);
         return "Deleted Successfully";
     }
+
+    @DeleteMapping("/series")
+    public String deleteAllSeries()
+    {
+        serieService.deleteAllSeries();
+        return "Deleted Successfully";
+    }
     @PutMapping("/serie/{id}")
     public Serie updateSerie(@RequestBody Serie serie,@PathVariable("id") Long serieId)
     {
         return serieService.updateSerie(serie, serieId);
+    }
+
+    @GetMapping("/serie/{name}")
+    public List<Serie> getSerieByName(@PathVariable (value = "name") String name)
+    {
+        return serieService.getSerieByName(name);
+    }
+
+    @GetMapping("/series/{id}")
+    public Serie getSerieById(@PathVariable("id") long id)
+    {
+        return serieService.getSerieById(id);
     }
 }

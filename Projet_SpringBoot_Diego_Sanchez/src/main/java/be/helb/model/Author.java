@@ -1,10 +1,15 @@
 package be.helb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity// va créer automatiquement la table
+@Table(name = "authors")
 public class Author implements Serializable
 {
     @Id
@@ -24,7 +29,21 @@ public class Author implements Serializable
     @Column(name="dateofdeath")
     private LocalDate dateOfDeath;
 
+    @ManyToMany(mappedBy = "authors")
+    @JsonIgnore
+    private Set<Album> albums = new HashSet<>();
 
+
+
+    public void addAlbum(Album album) {
+        this.albums.add(album);
+        album.getAuthors().add(this);
+    }
+
+    public void removeAlbum(Album album) {
+        this.albums.remove(album);
+        album.getAuthors().remove(this);
+    }
     public Long getId() {
         return id;
     }
@@ -71,5 +90,13 @@ public class Author implements Serializable
 
     public void setDateOfDeath(LocalDate dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
+    }
+
+    public Set<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(Set<Album> albums) {
+        this.albums = albums;
     }
 }

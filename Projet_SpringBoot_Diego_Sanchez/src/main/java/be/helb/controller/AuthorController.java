@@ -6,9 +6,9 @@ import be.helb.service.AlbumService;
 import be.helb.service.AuthorService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin
 @RestController //crée un singleton du controleur
 public class AuthorController
 {
@@ -18,15 +18,13 @@ public class AuthorController
     {
         this.authorService = authorService;
     }
-
-    @GetMapping("authors")
-    public List<Author> getAuthorsList()
-    {
+    @GetMapping("/authors")
+    public List<Author> getAuthorsList() {
         return authorService.getAll();
     }
 
     @PostMapping("/author")
-    public Author createAuthor(@Valid @RequestBody Author author)
+    public Author createAuthor(@RequestBody Author author)
     {
         return authorService.createAuthor(author);
     }
@@ -37,10 +35,29 @@ public class AuthorController
         authorService.deleteAuthorById(authorId);
         return "Deleted Successfully";
     }
+
+    @DeleteMapping("/authors")
+    public String deleteAllAuthors()
+    {
+        authorService.deleteAllAuthors();
+        return "Deleted Successfully";
+    }
     @PutMapping("/author/{id}")
     public Author updateAuthor(@RequestBody Author author,@PathVariable("id") Long authorId)
     {
         return authorService.updateAuthor(author, authorId);
+    }
+
+    @GetMapping("/author/{name}")
+    public Author getAuthorByName(@PathVariable("name") String name)
+    {
+        return authorService.getAuthorByName(name);
+    }
+
+    @GetMapping("/authors/{id}")
+    public Author getAuthorById(@PathVariable("id") long id)
+    {
+        return authorService.getAuthorById(id);
     }
 
 }

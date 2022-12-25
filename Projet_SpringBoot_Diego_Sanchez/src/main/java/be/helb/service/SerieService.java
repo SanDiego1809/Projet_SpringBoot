@@ -34,10 +34,16 @@ public class SerieService
         serieDao.deleteById(serieId);
     }
 
+    public void deleteAllSeries()
+    {
+        serieDao.deleteAll();
+    }
+
     public Serie updateSerie(Serie serie, Long serieId)
     {
         Serie depDB = serieDao.findById(serieId).get();
 
+        depDB.setName(serie.getName());
         depDB.setGenre(serie.getGenre());
         depDB.setNumberOfVolumes(serie.getNumberOfVolumes());
         depDB.setOrigin(serie.getOrigin());
@@ -45,6 +51,21 @@ public class SerieService
 
         return serieDao.save(depDB);
     }
+
+    public List<Serie> getSerieByName(String name)
+    {
+
+        List<Serie> series = serieDao.findByName(name);
+        return series;
+    }
+    public Serie getSerieById(Long id)
+    {
+
+        Serie serie = serieDao.findById(id).get();
+        return serie;
+    }
+
+
 
     public SerieDao getSerieDao() {
         return serieDao;

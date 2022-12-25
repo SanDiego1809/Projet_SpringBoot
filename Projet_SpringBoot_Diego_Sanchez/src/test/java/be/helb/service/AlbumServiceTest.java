@@ -42,6 +42,7 @@ public class AlbumServiceTest
 
         albumDaoMock = EasyMock.mock(AlbumDao.class);
         EasyMock.expect(albumDaoMock.findAll()).andReturn(albumList);
+
         albumService = new AlbumService(albumDaoMock);
         List<Album> result = albumService.getAll();
         EasyMock.verify();

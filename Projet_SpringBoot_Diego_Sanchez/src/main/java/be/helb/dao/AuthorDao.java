@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface AuthorDao extends JpaRepository<Author, Long>
 {
-    //List<Author> findByName(String name);
+    Author findByName(String name);
+
 }

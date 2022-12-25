@@ -1,8 +1,13 @@
 package be.helb.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity// va créer automatiquement la table
 @Table(name = "albums")
@@ -15,9 +20,10 @@ public class Album implements Serializable
     private String name;
     private int number;
 
-    private String scriptwriter;
-    private String drawer;
-    private String colorist;
+   /* @OneToMany
+    private Author scriptwriter;
+    private Author drawer;
+    private Author colorist;*/
 
     private String editor;
 
@@ -27,12 +33,19 @@ public class Album implements Serializable
     @Column(name="numberofpages")
     private int numberOfPages;
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "serie_id", nullable = false)
-    private Serie serie;*/
+    private Serie serie;
+
+    @ManyToMany
+    @JoinTable(name = "album_authors",
+            joinColumns = {@JoinColumn(name = "album_id")},
+            inverseJoinColumns = {@JoinColumn(name = "author_id")})
+    private Set<Author> authors = new HashSet<>();
 
 
-    public Album() {
+    public Album()
+    {
 
     }
     public Album(String name)
@@ -64,29 +77,29 @@ public class Album implements Serializable
         this.number = number;
     }
 
-    public String getScriptwriter() {
+    /*public Author getScriptwriter() {
         return scriptwriter;
     }
 
-    public void setScriptwriter(String scriptwriter) {
+    public void setScriptwriter(Author scriptwriter) {
         this.scriptwriter = scriptwriter;
     }
 
-    public String getDrawer() {
+    public Author getDrawer() {
         return drawer;
     }
 
-    public void setDrawer(String drawer) {
+    public void setDrawer(Author drawer) {
         this.drawer = drawer;
     }
 
-    public String getColorist() {
+    public Author getColorist() {
         return colorist;
     }
 
-    public void setColorist(String colorist) {
+    public void setColorist(Author colorist) {
         this.colorist = colorist;
-    }
+    }*/
 
     public String getEditor() {
         return editor;
@@ -112,11 +125,19 @@ public class Album implements Serializable
         this.numberOfPages = numberOfPages;
     }
 
-    /*public Serie getSerie() {
+    public Serie getSerie() {
         return serie;
     }
 
     public void setSerie(Serie serie) {
         this.serie = serie;
-    }*/
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
+    }
 }

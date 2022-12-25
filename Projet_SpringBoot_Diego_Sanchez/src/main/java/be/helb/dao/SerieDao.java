@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface SerieDao extends JpaRepository<Serie, Long>
 {
-    //List<Serie> findByName(String name);
+    List<Serie> findByName(String name);
+
 }

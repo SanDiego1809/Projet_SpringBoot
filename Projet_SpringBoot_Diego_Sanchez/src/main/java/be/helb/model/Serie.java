@@ -14,6 +14,7 @@ public class Serie implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
     private String genre;
 
     @Column(name="numberofvolumes")
@@ -26,6 +27,12 @@ public class Serie implements Serializable
     //private Set<Album> albums;
 
 
+    public Serie()
+    {
+
+    }
+
+
 
     public Long getId() {
         return id;
@@ -33,6 +40,14 @@ public class Serie implements Serializable
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getGenre() {
