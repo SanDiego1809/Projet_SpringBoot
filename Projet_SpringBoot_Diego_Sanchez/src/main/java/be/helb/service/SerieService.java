@@ -1,9 +1,6 @@
 package be.helb.service;
 
-import be.helb.dao.AlbumDao;
 import be.helb.dao.SerieDao;
-import be.helb.model.Album;
-import be.helb.model.Author;
 import be.helb.model.Serie;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +30,11 @@ public class SerieService
     {
         serieDao.deleteById(serieId);
     }
+    public void deleteSerieByName(String serieName)
+    {
+        List<Serie> seriesList = serieDao.findByName(serieName);
+        serieDao.deleteAll(seriesList);
+    }
 
     public void deleteAllSeries()
     {
@@ -51,12 +53,11 @@ public class SerieService
 
         return serieDao.save(depDB);
     }
-
     public List<Serie> getSerieByName(String name)
     {
 
-        List<Serie> series = serieDao.findByName(name);
-        return series;
+        List<Serie> seriesList = serieDao.findByNameContainsIgnoreCase(name);
+        return seriesList;
     }
     public Serie getSerieById(Long id)
     {
@@ -64,14 +65,8 @@ public class SerieService
         Serie serie = serieDao.findById(id).get();
         return serie;
     }
-
-
-
-    public SerieDao getSerieDao() {
-        return serieDao;
-    }
-
-    public void setSerieDao(SerieDao serieDao) {
-        this.serieDao = serieDao;
+    public List<Serie> getAllSeriesByGenre(String genre)
+    {
+        return serieDao.findSerieByGenreContainsIgnoreCase(genre);
     }
 }

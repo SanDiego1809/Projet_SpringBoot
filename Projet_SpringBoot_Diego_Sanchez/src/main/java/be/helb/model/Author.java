@@ -32,9 +32,19 @@ public class Author implements Serializable
     @ManyToMany(mappedBy = "authors")
     @JsonIgnore
     private Set<Album> albums = new HashSet<>();
+    public Author()
+    {
 
-
-
+    }
+    public Author(String name)
+    {
+        this.name = name;
+    }
+    public Author(String name,String country)
+    {
+        this.name = name;
+        this.country = country;
+    }
     public void addAlbum(Album album) {
         this.albums.add(album);
         album.getAuthors().add(this);

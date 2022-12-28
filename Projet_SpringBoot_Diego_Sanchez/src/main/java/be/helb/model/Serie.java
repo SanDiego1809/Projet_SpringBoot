@@ -1,7 +1,6 @@
 package be.helb.model;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -23,16 +22,18 @@ public class Serie implements Serializable
     private String origin;
     private String language;
 
-    //@OneToMany(mappedBy = "serie")
-    //private Set<Album> albums;
-
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Album> albums;
 
     public Serie()
     {
 
     }
-
-
+    public Serie(String name)
+    {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -82,11 +83,11 @@ public class Serie implements Serializable
         this.language = language;
     }
 
-    /*public Set<Album> getAlbums() {
+    public Set<Album> getAlbums() {
         return albums;
     }
 
     public void setAlbums(Set<Album> albums) {
         this.albums = albums;
-    }*/
+    }
 }

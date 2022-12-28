@@ -193,7 +193,7 @@ class Author extends Component {
                         </form>
 
                         <button
-                            className="Danger"
+                            className="btn btn-danger"
                             onClick={this.deleteAuthor}
                         >
                             Delete
@@ -201,7 +201,7 @@ class Author extends Component {
 
                         <button
                             type="submit"
-                            className="Danger"
+                            className="btn btn-warning"
                             onClick={this.updateAuthor}
                         >
                             Update

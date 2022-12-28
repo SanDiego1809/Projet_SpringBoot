@@ -1,39 +1,42 @@
-import http from "../http-common";
+import axios from 'axios';
 
+import authHeader from "./authentification/auth-header";
+
+const API_URL = 'http://localhost:8080';
 class AlbumDataService
 {
     getAll()
     {
-        return http.get("/albums");
+        return axios.get(API_URL + "/albums",{ headers : authHeader() });
     }
 
     get(id)
     {
-        return http.get(`/albums/${id}`);
+        return axios.get(API_URL +`/albums/${id}`, { headers : authHeader() });
     }
 
     create(data) {
-        return http.post("/album", data);
+        return axios.post(API_URL +"/album", data, { headers : authHeader() });
     }
 
     update(id, data) {
-        return http.put(`/album/${id}`, data);
+        return axios.put(API_URL +`/album/${id}`, data, { headers : authHeader() });
     }
 
     delete(id) {
-        return http.delete(`/album/${id}`);
+        return axios.delete(API_URL +`/album/${id}`, { headers : authHeader() });
     }
 
     deleteAll() {
-        return http.delete(`/albums`);
+        return axios.delete(API_URL +"/albums", { headers : authHeader() });
     }
 
     findByName(name) {
-        return http.get(`/album/${name}`);
+        return axios.get(API_URL +`/album/${name}`, { headers : authHeader() });
     }
 
     /*findBySerieId(id) {
-        return http.get(`/serie?id=${id}`);
+        return http.get(API_URL +`/serie?id=${id}`);
     }*/
 }
 

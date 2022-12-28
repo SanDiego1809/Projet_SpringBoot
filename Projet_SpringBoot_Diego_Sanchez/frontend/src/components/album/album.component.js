@@ -320,7 +320,7 @@ class Album extends Component
                         </form>
 
                         <button
-                            className="Danger"
+                            className="btn btn-danger"
                             onClick={this.deleteAlbum}
                         >
                             Delete
@@ -328,7 +328,7 @@ class Album extends Component
 
                         <button
                             type="submit"
-                            className="Danger"
+                            className="btn btn-warning"
                             onClick={this.updateAlbum}
                         >
                             Update

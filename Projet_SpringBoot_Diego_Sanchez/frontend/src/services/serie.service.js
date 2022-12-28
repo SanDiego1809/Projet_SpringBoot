@@ -1,40 +1,38 @@
-import http from "../http-common";
+import axios from 'axios';
+import authHeader from "./authentification/auth-header";
 
+const API_URL = "http://localhost:8080";
 class SerieDataService
 {
     getAll()
     {
-        return http.get("/series");
+        return axios.get(API_URL +"/series",{ headers : authHeader() });
     }
 
     get(id)
     {
-        return http.get(`/series/${id}`);
+        return axios.get(API_URL +`/series/${id}`,{ headers : authHeader() });
     }
 
     create(data) {
-        return http.post("/serie", data);
+        return axios.post(API_URL +"/serie", data,{ headers : authHeader() });
     }
 
     update(id, data) {
-        return http.put(`/serie/${id}`, data);
+        return axios.put(API_URL +`/serie/${id}`, data,{ headers : authHeader() });
     }
 
     delete(id) {
-        return http.delete(`/serie/${id}`);
+        return axios.delete(API_URL +`/serie/${id}`,{ headers : authHeader() });
     }
 
     deleteAll() {
-        return http.delete(`/series`);
+        return axios.delete(API_URL +`/series`,{ headers : authHeader() });
     }
 
     findByName(name) {
-        return http.get(`/serie/${name}`);
+        return axios.get(API_URL +`/serie/${name}`,{ headers : authHeader() });
     }
-
-    /*findBySerieId(id) {
-        return http.get(`/serie?id=${id}`);
-    }*/
 }
 
 export default new SerieDataService();

@@ -194,7 +194,7 @@ class Serie extends Component {
                         </form>
 
                         <button
-                            className="Danger"
+                            className="btn btn-danger"
                             onClick={this.deleteSerie}
                         >
                             Delete
@@ -202,7 +202,7 @@ class Serie extends Component {
 
                         <button
                             type="submit"
-                            className="Danger"
+                            className="btn btn-warning"
                             onClick={this.updateSerie}
                         >
                             Update

@@ -1,36 +1,38 @@
-import http from "../http-common";
+import axios from 'axios';
+import authHeader from "./authentification/auth-header";
 
+const API_URL = 'http://localhost:8080';
 class AuthorDataService
 {
     getAll()
     {
-        return http.get(`/authors`);
+        return axios.get(API_URL +`/authors`,{ headers : authHeader() });
     }
 
     get(id)
     {
-        return http.get(`/authors/${id}`);
+        return axios.get(API_URL +`/authors/${id}`,{ headers : authHeader() });
     }
 
     create(data) {
-        return http.post(`/author`, data);
+        return axios.post(API_URL +`/author`, data,{ headers : authHeader() });
     }
 
     update(id, data) {
-        return http.put(`/author/${id}`, data);
+        return axios.put(API_URL +`/author/${id}`, data,{ headers : authHeader() });
     }
 
     delete(id) {
-        return http.delete(`/author/${id}`);
+        return axios.delete(API_URL +`/author/${id}`,{ headers : authHeader() });
     }
 
     deleteAll()
     {
-        return http.delete(`/authors`);
+        return axios.delete(API_URL +`/authors`,{ headers : authHeader() });
     }
 
     findByName(name) {
-        return http.get(`/author/${name}`);
+        return axios.get(API_URL +`/author/${name}`,{ headers : authHeader() });
     }
 }
 

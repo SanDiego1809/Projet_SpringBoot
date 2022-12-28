@@ -1,14 +1,13 @@
 package be.helb.service;
 
-import be.helb.dao.AlbumDao;
 import be.helb.dao.AuthorDao;
-import be.helb.dao.SerieDao;
 import be.helb.model.Album;
 import be.helb.model.Author;
-import be.helb.model.Serie;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class AuthorService
 {
@@ -32,23 +31,47 @@ public class AuthorService
 
     public void deleteAuthorById(Long authorId)
     {
+        Author author = authorDao.findById(authorId).get();
+        for (Album album: author.getAlbums())
+        {
+            album.getAuthors().remove(author);
+        }
+        author.getAlbums().clear();
         authorDao.deleteById(authorId);
+    }
+    public void deleteAuthorByName(String name)
+    {
+        List<Author> authorsList = authorDao.findByName(name);
+
+        for (Author author: authorsList)
+        {
+            for (Album album: author.getAlbums())
+            {
+                album.getAuthors().remove(author);
+            }
+            author.getAlbums().clear();
+        }
+        authorDao.deleteAll(authorsList);
+
     }
     public void deleteAllAuthors()
     {
         List<Author> list = authorDao.findAll();
-
         for (Author author: list)
         {
+            for (Album album: author.getAlbums())
+            {
+                album.getAuthors().clear();
+            }
             author.getAlbums().clear();
         }
+
         authorDao.deleteAll();
     }
 
-    public Author updateAuthor(Author author, Long authorId)
+    public Author updateAuthorById(Author author, Long authorId)
     {
         Author depDB = authorDao.findById(authorId).get();
-
 
         depDB.setName(author.getName());
         depDB.setFirstName(author.getFirstName());
@@ -56,14 +79,11 @@ public class AuthorService
         depDB.setDateOfBirth(author.getDateOfBirth());
         depDB.setDateOfDeath(author.getDateOfDeath());
 
-
         return authorDao.save(depDB);
     }
-
-    public Author getAuthorByName(String name)
+    public List<Author> getAuthorByName(String name)
     {
-
-        Author authors = authorDao.findByName(name);
+        List<Author> authors = authorDao.findByNameContainsIgnoreCase(name);
         return authors;
     }
     public Author getAuthorById(Long id)
@@ -73,11 +93,14 @@ public class AuthorService
         return author;
     }
 
-    public AuthorDao getAuthorDao() {
-        return authorDao;
+    public Set<Album> getAllAlbumsByAuthorId(Long authorId)
+    {
+        Author author = getAuthorById(authorId);
+        Set<Album> albums = author.getAlbums();
+        return albums;
     }
-
-    public void setAuthorDao(AuthorDao authorDao) {
-        this.authorDao = authorDao;
+    public List<Author> getAllAuthorsByCountry(String country)
+    {
+        return authorDao.findAuthorByCountryContainsIgnoreCase(country);
     }
 }

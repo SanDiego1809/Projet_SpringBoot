@@ -1,0 +1,9 @@
+be\helb\controller\AlbumControllerIT.class
+be\helb\controller\SerieControllerIT.class
+be\helb\controller\AuthorControllerIT.class
+be\helb\Service.class
+be\helb\service\UserServiceTest.class
+be\helb\service\SerieServiceTest.class
+be\helb\service\AlbumServiceTest.class
+be\helb\controller\UserControllerIT.class
+be\helb\service\AuthorServiceTest.class

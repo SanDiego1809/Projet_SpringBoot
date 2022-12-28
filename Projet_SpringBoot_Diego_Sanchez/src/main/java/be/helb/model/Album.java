@@ -1,8 +1,5 @@
 package be.helb.model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,12 +16,6 @@ public class Album implements Serializable
 
     private String name;
     private int number;
-
-   /* @OneToMany
-    private Author scriptwriter;
-    private Author drawer;
-    private Author colorist;*/
-
     private String editor;
 
     @Column(name="dateofpublication")
@@ -34,7 +25,7 @@ public class Album implements Serializable
     private int numberOfPages;
 
     @ManyToOne
-    @JoinColumn(name = "serie_id", nullable = false)
+    @JoinColumn(name = "serie_id")
     private Serie serie;
 
     @ManyToMany
@@ -42,8 +33,6 @@ public class Album implements Serializable
             joinColumns = {@JoinColumn(name = "album_id")},
             inverseJoinColumns = {@JoinColumn(name = "author_id")})
     private Set<Author> authors = new HashSet<>();
-
-
     public Album()
     {
 
@@ -76,30 +65,6 @@ public class Album implements Serializable
     public void setNumber(int number) {
         this.number = number;
     }
-
-    /*public Author getScriptwriter() {
-        return scriptwriter;
-    }
-
-    public void setScriptwriter(Author scriptwriter) {
-        this.scriptwriter = scriptwriter;
-    }
-
-    public Author getDrawer() {
-        return drawer;
-    }
-
-    public void setDrawer(Author drawer) {
-        this.drawer = drawer;
-    }
-
-    public Author getColorist() {
-        return colorist;
-    }
-
-    public void setColorist(Author colorist) {
-        this.colorist = colorist;
-    }*/
 
     public String getEditor() {
         return editor;

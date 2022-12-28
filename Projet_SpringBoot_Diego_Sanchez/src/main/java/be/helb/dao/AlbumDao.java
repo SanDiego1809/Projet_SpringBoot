@@ -8,6 +8,6 @@ import java.util.List;
 public interface AlbumDao extends JpaRepository<Album, Long>
 {
     List<Album> findByName(String name);
-    //Album createAlbum(Album album);
+    List<Album> findByNameContainsIgnoreCase(String name);
     List<Album> findBySerieId(Long id);
 }

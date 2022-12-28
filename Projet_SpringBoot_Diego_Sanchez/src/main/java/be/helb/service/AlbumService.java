@@ -3,7 +3,6 @@ package be.helb.service;
 import be.helb.dao.AlbumDao;
 import be.helb.model.Album;
 import be.helb.model.Author;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +35,11 @@ public class AlbumService
     {
         albumDao.deleteById(albumId);
     }
+    public void deleteAlbumByName(String AlbumName)
+    {
+        List<Album> albumsList = albumDao.findByName(AlbumName);
+        albumDao.deleteAll(albumsList);
+    }
 
     public void deleteAllAlbums()
     {
@@ -45,13 +49,9 @@ public class AlbumService
     public Album updateAlbum(Album album, Long albumId)
     {
         Album depDB = albumDao.findById(albumId).get();
-                //.orElseThrow(() -> new ResourceNotFoundException("TagId " + id + "not found"));
 
         depDB.setName(album.getName());
         depDB.setNumber(album.getNumber());
-       /* depDB.setScriptwriter(album.getScriptwriter());
-        depDB.setDrawer(album.getDrawer());
-        depDB.setColorist(album.getColorist());*/
         depDB.setEditor(album.getEditor());
         depDB.setDateOfPublication(album.getDateOfPublication());
         depDB.setNumberOfPages(album.getNumberOfPages());
@@ -63,20 +63,13 @@ public class AlbumService
             depDB.getAuthors().add(author);
         }
 
-
-
-
-
-        //depDB.setAuthors(album.getAuthors());
-
         return albumDao.save(depDB);
     }
-
     public List<Album> getAlbumByName(String name)
     {
 
-        List<Album> albums = albumDao.findByName(name);
-        return albums;
+        List<Album> albumsList = albumDao.findByNameContainsIgnoreCase(name);
+        return albumsList;
     }
     public Album getAlbumById(Long id)
     {
@@ -86,23 +79,13 @@ public class AlbumService
     }
 
 
-    public List<Album> getAllAlbumsBySerieId(Long albumId)
+    public List<Album> getAllAlbumsBySerieId(Long serieId)
     {
         /*if(!albumDao.existsById(albumId))
         {
 
         }*/
-        List<Album> albums = albumDao.findBySerieId(albumId);
+        List<Album> albums = albumDao.findBySerieId(serieId);
         return albums;
-    }
-
-    public AlbumDao getAlbumDao()
-    {
-        return albumDao;
-    }
-
-    public void setAlbumDao(AlbumDao albumDao)
-    {
-        this.albumDao = albumDao;
     }
 }

@@ -2,6 +2,8 @@ package be.helb.controller;
 
 import be.helb.model.Album;
 import be.helb.service.AlbumService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,55 +20,105 @@ public class AlbumController
     }
 
     @GetMapping("/albums")
-    public List<Album> getAlbumsList()
+    public ResponseEntity<List<Album>> getAlbumsList()
     {
-        return albumService.getAll();
+        try {
+            List<Album> albumsList = albumService.getAll();
+            if (albumsList.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(albumsList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-
-
     @PostMapping("/album")
-    public Album createAlbum(@RequestBody Album album)
+    public ResponseEntity<Album> createAlbum(@RequestBody Album album)
     {
-        return albumService.createAlbum(album);
+        try {
+            return new ResponseEntity<>(albumService.createAlbum(album), HttpStatus.CREATED);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/album/{id}")
-    public String deleteAlbumById(@PathVariable("id") Long albumId)
+    public ResponseEntity<HttpStatus> deleteAlbumById(@PathVariable("id") Long albumId)
     {
-        albumService.deleteAlbumById(albumId);
-        return "Deleted Successfully";
+        try {
+            albumService.deleteAlbumById(albumId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping("/albumName/{name}")
+    public ResponseEntity<HttpStatus> deleteAlbumByName(@PathVariable("name") String albumName)
+    {
+        try {
+            albumService.deleteAlbumByName(albumName);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/albums")
-    public String deleteAllAlbums()
+    public ResponseEntity<HttpStatus> deleteAllAlbums()
     {
-        albumService.deleteAllAlbums();
-        return "Deleted Successfully";
+        try {
+            albumService.deleteAllAlbums();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     @PutMapping("/album/{id}")
-    public Album updateAlbum(@RequestBody Album album,@PathVariable("id") Long albumId)
+    public ResponseEntity<Album> updateAlbum(@RequestBody Album album,@PathVariable("id") Long albumId)
     {
-        return albumService.updateAlbum(album, albumId);
+        try{
+            return new ResponseEntity<>(albumService.updateAlbum(album, albumId),HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-
     @GetMapping("/album/{name}")
-    public List<Album> getAlbumByName(@PathVariable (value = "name") String name)
+    public ResponseEntity<List<Album>> getAlbumByName(@PathVariable (value = "name") String name)
     {
-        return albumService.getAlbumByName(name);
+        try {
+            List<Album> albumsList = albumService.getAlbumByName(name);
+            if (albumsList.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(albumsList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/albums/{id}")
-    public Album getAlbumById(@PathVariable("id") long id)
+    public ResponseEntity<Album> getAlbumById(@PathVariable("id") long id)
     {
-        return albumService.getAlbumById(id);
+        try{
+            return new ResponseEntity<>(albumService.getAlbumById(id),HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
-    @GetMapping("/series/{id}/albums")
-    public List<Album> getAllAlbumsBySerie(@PathVariable (value = "id") Long albumId)
+    @GetMapping("/albumBySerieId/{id}")
+    public ResponseEntity<List<Album>> getAllAlbumsBySerie(@PathVariable (value = "id") Long serieId)
     {
-        return albumService.getAllAlbumsBySerieId(albumId);
+        try {
+            List<Album> albumsList =  albumService.getAllAlbumsBySerieId(serieId);
+            if (albumsList.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(albumsList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-
-
 }
