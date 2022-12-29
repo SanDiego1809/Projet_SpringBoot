@@ -81,6 +81,12 @@ class Login extends Component {
         }
     }
 
+    handleRegister()
+    {
+        this.props.router.navigate("/register");
+        window.location.reload();
+    }
+
     render() {
         return (
             <div className="col-md-12">
@@ -148,7 +154,18 @@ class Login extends Component {
                             }}
                         />
                     </Form>
+
                 </div>
+                <div id="divButton">
+                    <a href="/register">
+                        <button
+                            className="btn btn-success"
+                        >
+                            <span>Register</span>
+                        </button>
+                    </a>
+                </div>
+
             </div>
         );
     }

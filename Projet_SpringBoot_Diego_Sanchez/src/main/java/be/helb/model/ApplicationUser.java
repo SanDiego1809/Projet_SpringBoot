@@ -1,5 +1,8 @@
 package be.helb.model;
 
+import be.helb.model.Image.Image;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,7 +15,6 @@ public class ApplicationUser implements Serializable
     @Column(unique = true)
     private String username;
     private String password;
-
     public String getUsername() {
         return username;
     }

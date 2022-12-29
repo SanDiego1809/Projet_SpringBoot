@@ -1,4 +1,7 @@
-package be.helb.model;
+package be.helb.model.Image;
+
+import be.helb.model.ApplicationUser;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,8 +11,9 @@ import java.io.Serializable;
 public class Image implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     private String name;
 
@@ -27,7 +31,7 @@ public class Image implements Serializable
         this.data = data;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

@@ -1,9 +1,9 @@
 package be.helb.dao;
 
-import be.helb.model.Image;
+import be.helb.model.Image.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ImageDao extends JpaRepository<Image, Long>
+public interface ImageDao extends JpaRepository<Image, String>
 {
 
 }
