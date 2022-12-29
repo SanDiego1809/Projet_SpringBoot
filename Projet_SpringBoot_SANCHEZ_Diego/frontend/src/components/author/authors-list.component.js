@@ -174,7 +174,7 @@ export default class AuthorsList extends Component {
 
                             <Link
                                 to={"/authors/" + currentAuthor.id}
-                                className="button danger"
+                                className="btn btn-warning"
                             >
                                 Edit
                             </Link>

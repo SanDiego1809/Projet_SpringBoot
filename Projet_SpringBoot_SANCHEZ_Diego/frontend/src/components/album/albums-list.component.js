@@ -188,7 +188,7 @@ export default class AlbumsList extends Component {
 
                             <Link
                                 to={"/albums/" + currentAlbum.id}
-                                className="button danger"
+                                className="btn btn-warning"
                             >
                                 Edit
                             </Link>

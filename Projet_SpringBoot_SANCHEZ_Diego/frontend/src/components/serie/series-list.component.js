@@ -174,7 +174,7 @@ export default class SeriesList extends Component {
 
                             <Link
                                 to={"/series/" + currentSerie.id}
-                                className="button danger"
+                                className="btn btn-warning"
                             >
                                 Edit
                             </Link>

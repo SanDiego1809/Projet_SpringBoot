@@ -13,25 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AlbumServiceTest
 {
-    //@Autowired --> ne fonctionne pas pcq la classe n'est pas un bin (Pas d'annotation)
-    //private AlbumService albumService;
-
-    //Impossible d'utiliser le DAO qui se trouve dans le dossier main
-    //Mocker = créer un faux DAO qui va renvoyer des fausses données
-
-    //trois types d'erreurs: problème assert equals --> valeurs de retour
-    //                       si le test a 2 find all
-    //                       si on a pas mis un verify
-
-    //replay->appel-> verify
-
-    //Faire minimum de tests pertinents
-
-
     private AlbumDao albumDaoMock;
-
-    private AlbumService albumService; //= new AlbumService();
-
+    private AlbumService albumService;
 
     @Test
     public void testGetAllAlbums()
@@ -66,6 +49,20 @@ public class AlbumServiceTest
         List<Album> result = albumService.getAllAlbumsBySerieId(serie1.getId());
         EasyMock.verify(albumDaoMock);
         assertEquals(albumsList, result);
+    }
+
+    @Test
+    public void testCreateAlbum()
+    {
+        Album albumTest = new Album("test");
+        albumDaoMock = EasyMock.mock(AlbumDao.class);
+        EasyMock.expect(albumDaoMock.save(albumTest)).andReturn(albumTest);
+
+        albumService = new AlbumService(albumDaoMock);
+        EasyMock.replay(albumDaoMock);
+        Album result = albumService.createAlbum(albumTest);
+        EasyMock.verify(albumDaoMock);
+        assertEquals(albumTest, result);
     }
 
 

@@ -1,6 +1,8 @@
 package be.helb.service;
 
+import be.helb.dao.AuthorDao;
 import be.helb.dao.SerieDao;
+import be.helb.model.Author;
 import be.helb.model.Serie;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
@@ -45,5 +47,18 @@ public class SerieServiceTest
         EasyMock.verify(serieDaoMock);
 
         assertEquals(seriesList, result);
+    }
+    @Test
+    public void testCreateSerie()
+    {
+        Serie serieTest = new Serie("test");
+        serieDaoMock = EasyMock.mock(SerieDao.class);
+        EasyMock.expect(serieDaoMock.save(serieTest)).andReturn(serieTest);
+
+        serieService = new SerieService(serieDaoMock);
+        EasyMock.replay(serieDaoMock);
+        Serie result = serieService.createSerie(serieTest);
+        EasyMock.verify(serieDaoMock);
+        assertEquals(serieTest, result);
     }
 }

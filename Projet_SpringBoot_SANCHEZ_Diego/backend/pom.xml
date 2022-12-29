@@ -95,7 +95,7 @@
 
     </dependencies>
 
-    <!-- skip tests integration -->
+    <!-- skip tests integration clean install-->
     <build>
         <plugins>
             <plugin>

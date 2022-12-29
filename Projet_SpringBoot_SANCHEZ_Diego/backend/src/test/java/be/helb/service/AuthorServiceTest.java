@@ -1,6 +1,8 @@
 package be.helb.service;
 
+import be.helb.dao.AlbumDao;
 import be.helb.dao.AuthorDao;
+import be.helb.model.Album;
 import be.helb.model.Author;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
@@ -45,5 +47,18 @@ public class AuthorServiceTest
         EasyMock.verify(authorDaoMock);
 
         assertEquals(authorsList, result);
+    }
+    @Test
+    public void testCreateAuthor()
+    {
+        Author authorTest = new Author("test");
+        authorDaoMock = EasyMock.mock(AuthorDao.class);
+        EasyMock.expect(authorDaoMock.save(authorTest)).andReturn(authorTest);
+
+        authorService = new AuthorService(authorDaoMock);
+        EasyMock.replay(authorDaoMock);
+        Author result = authorService.createAuthor(authorTest);
+        EasyMock.verify(authorDaoMock);
+        assertEquals(authorTest, result);
     }
 }

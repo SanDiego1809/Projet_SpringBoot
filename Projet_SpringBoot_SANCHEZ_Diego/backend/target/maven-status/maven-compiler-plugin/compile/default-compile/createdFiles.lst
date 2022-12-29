@@ -5,7 +5,9 @@ be\helb\security\ConfigPassword.class
 be\helb\controller\UserController.class
 be\helb\service\AlbumService.class
 be\helb\controller\SerieController.class
+be\helb\model\Image\Image.class
 be\helb\dao\SerieDao.class
+be\helb\controller\ImageController.class
 be\helb\security\AuthenticationFilter.class
 be\helb\service\AuthorService.class
 be\helb\model\Author.class
@@ -13,12 +15,16 @@ be\helb\service\UserDetailsServiceImpl.class
 be\helb\model\MyUser.class
 be\helb\security\WebSecurityConfiguration.class
 be\helb\service\UserService.class
+be\helb\model\Image\ResponseFile.class
 be\helb\model\ApplicationUser.class
 be\helb\MainApplication.class
 be\helb\service\SerieService.class
 be\helb\model\Serie.class
 be\helb\security\AuthorizationFilter.class
+be\helb\service\ImageService.class
 be\helb\dao\AuthorDao.class
+be\helb\model\Image\ResponseMessage.class
 be\helb\service\SpringFoxConfig.class
+be\helb\dao\ImageDao.class
 be\helb\model\Album.class
 be\helb\dao\AlbumDao.class
