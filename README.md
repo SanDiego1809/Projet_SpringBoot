@@ -8,8 +8,8 @@ Lancez Sql et configurez le nom d'utilisateur et le mot de passe de la base de d
 ![image](https://user-images.githubusercontent.com/94550801/209986276-b90a367f-9135-434c-8186-4677bfb8c7f7.png)
 
 <h3>Attention</h3>
-<p>Pour créer un album, il faut créer une série et un auteur</p>
-L'upload des images peut se faire avec Postman.
+<p>1. Pour créer un album, il faut créer une série et un auteur.</p>
+<p>2. L'upload des images peut se faire avec Postman.</p>
 
 ![image](https://user-images.githubusercontent.com/94550801/209995137-52b067a9-4b96-428b-b197-78c1d17933c7.png)
 
