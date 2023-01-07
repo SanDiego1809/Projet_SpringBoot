@@ -30,6 +30,9 @@ Si vous avez créé un auteur, une série ou un album, vous pouvez cliquer dessu
 ![image](https://user-images.githubusercontent.com/94550801/209997195-dc9d6962-26b5-4fe2-a4a7-c3b9ea7fa477.png)
 ![image](https://user-images.githubusercontent.com/94550801/209997224-f99f6fd7-63de-4956-9e57-ef1da6cf5697.png)
 
+<h3>Attention</h3>
+<p>A la création d'un album, vous pouvez y ajouter qu'un seul auteur parce que je n'ai pas trouvé de moyen de rajouter un multiselect fonctionnel. Cependant sur swagger et sur le backend il est possible d'ajouter plusieurs auteurs pour un album.</p>
+
 Si vous rencontrez un problème, contactez-moi à l'adresse mail de l'école : dsanchezmarigil@helb-prigogine.be.
 
 Bonne évaluation!
